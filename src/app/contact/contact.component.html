@@ -1,0 +1,58 @@
+<h3>Contact</h3>
+
+<form (ngSubmit)="onSubmit($event)">
+  <label>
+    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" />
+  </label>
+  <label>
+    <textarea
+      [(ngModel)]="message"
+      name="message"
+      placeholder="Message"
+    ></textarea>
+  </label>
+  <div>
+    <button type="reset">Clear</button>
+    <button type="submit">Send!</button>
+  </div>
+
+  <div>
+    {{ email }}
+    {{ message }}
+  </div>
+</form>
+
+<form (ngSubmit)="onSubmit($event)" [formGroup]="contact">
+  <label>
+    <input
+      type="email"
+      formControlName="email"
+      name="email"
+      placeholder="Email"
+      required
+    />
+  </label>
+  <label>
+    <input
+      type="text"
+      formControlName="city"
+      name="city"
+      placeholder="City"
+    />
+  </label>
+  <label>
+    <textarea
+      name="message"
+      formControlName="message"
+      placeholder="Message"
+    ></textarea>
+  </label>
+  <div>
+    <button type="reset">Clear</button>
+    <button type="submit">Send!</button>
+  </div>
+  <div>
+    {{ contact.value | json }}
+    {{ contact.status | json }}
+  </div>
+</form>
