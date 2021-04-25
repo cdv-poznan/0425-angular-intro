@@ -2,13 +2,24 @@
 
 <form (ngSubmit)="onSubmit($event)">
   <label>
-    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" />
+    <input
+      type="email"
+      [(ngModel)]="email"
+      #emailModel="ngModel"
+      name="email"
+      placeholder="Email"
+      required
+      minlength="5"
+    />
+    <div *ngIf="emailModel.errors?.required">Email is required</div>
+    <div *ngIf="emailModel.errors?.minlength">Email too short</div>
   </label>
   <label>
     <textarea
       [(ngModel)]="message"
       name="message"
       placeholder="Message"
+      minlength="10"
     ></textarea>
   </label>
   <div>
@@ -29,16 +40,10 @@
       formControlName="email"
       name="email"
       placeholder="Email"
-      required
     />
   </label>
   <label>
-    <input
-      type="text"
-      formControlName="city"
-      name="city"
-      placeholder="City"
-    />
+    <input type="text" formControlName="city" name="city" placeholder="City" />
   </label>
   <label>
     <textarea

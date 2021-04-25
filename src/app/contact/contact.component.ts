@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+
+export function cdvEmailValidator(): ValidatorFn {
+  return (control: AbstractControl) => {
+    const error = !String(control.value).endsWith('@cdv.pl');
+    return error ? { cdv: true } : null;
+  };
+}
 
 @Component({
   selector: 'app-contact',
@@ -14,7 +21,7 @@ export class ContactComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
     this.contact = this.formBuilder.group({
-      email: [''],
+      email: ['', [Validators.required, Validators.email, cdvEmailValidator()]],
       message: [''],
       street: [''],
       city: [''],
@@ -22,6 +29,16 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.contact.valueChanges.subscribe(value => {
+    //   console.log(this.contact.valid);
+    // });
+
+    const emailControl = this.contact.get('email');
+
+    emailControl.valueChanges.subscribe(value => {
+      console.log(emailControl.errors);
+    });
+
     // this.contact.setValue({
     //   email: 'asd',
     //   message: 'qwe',
@@ -30,7 +47,7 @@ export class ContactComponent implements OnInit {
     // });
 
     this.contact.patchValue({
-      email: 'asd',
+      email: '',
     });
   }
 
