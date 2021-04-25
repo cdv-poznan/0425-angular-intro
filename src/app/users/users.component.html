@@ -1,1 +1,7 @@
-<p>users works!</p>
+<ng-container *ngIf="followers$ | async as followers; else loading">
+  <div *ngFor="let follower of followers">
+    <a routerLink="/users/{{ follower }}">{{ follower }}</a>
+  </div>
+</ng-container>
+
+<ng-template #loading> Loading&hellip; </ng-template>

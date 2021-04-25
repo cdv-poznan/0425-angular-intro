@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-intro';
+
+  constructor(private router: Router) {
+    console.log(router);
+  }
+
+  randomNavigation(): void {
+    this.router.navigate(['home', Math.random()]); // /home/1
+    // this.router.navigateByUrl('/home/123');
+  }
 }
