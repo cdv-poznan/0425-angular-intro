@@ -15,19 +15,19 @@ export class AuthComponent implements OnInit, AfterViewInit {
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.httpClient
-      .get('https://api.github.com/users/juszczak')
-      .pipe(
-        map((response: { followers_url: string }) => response.followers_url),
-        switchMap(followersUrl => this.httpClient.get(followersUrl)),
-        map((followers: any[]) => followers.map(follower => follower.login)),
-      )
-      .subscribe(console.log);
+    // this.httpClient
+    //   .get('https://api.github.com/users/juszczak')
+    //   .pipe(
+    //     map((response: { followers_url: string }) => response.followers_url),
+    //     switchMap(followersUrl => this.httpClient.get(followersUrl)),
+    //     map((followers: any[]) => followers.map(follower => follower.login)),
+    //   )
+    //   .subscribe(console.log);
 
-    const url = 'https://reqres.in/api/users';
-    this.usersResponse$ = this.httpClient.get(url, {observe: 'response', responseType: 'json'});
-    this.usersResponse$.subscribe(console.log);
-    this.login('eve.holt@reqres.in', 'cityslicka').subscribe(console.log);
+    // const url = 'https://reqres.in/api/users';
+    // this.usersResponse$ = this.httpClient.get(url, {observe: 'response', responseType: 'json'});
+    // this.usersResponse$.subscribe(console.log);
+    // this.login('eve.holt@reqres.in', 'cityslicka').subscribe(console.log);
   }
 
   ngAfterViewInit(): void {
